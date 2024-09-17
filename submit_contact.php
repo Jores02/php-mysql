@@ -13,7 +13,17 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div class="container">
-    
+    <?php
+       
+       if (
+       (!isset($_GET['email']) || !filter_var($_GET['email'], FILTER_VALIDATE_EMAIL))
+       || (!isset($_GET['message']) || empty($_GET['message']))
+       )
+       {
+       echo('Il faut un email et un message valides pour soumettre le formulaire.');
+       return;
+       }
+    ?>
 
     <?php include_once('header.php'); ?>
         <h1>Site de recettes</h1>
@@ -34,18 +44,18 @@
                 <i><?php echo displayAuthor($recipe['author'], $users); ?></i>
             </article>
         <?php endforeach ?>
-        <div class="card">
+
         <h1>Message bien reçu !</h1>
-<div class="card-body">
-<h5 class="card-title">Rappel de vos informations</h5>
-<p class="card-text"><b>Email</b> : <?php echo $_GET['email']; ?> </p>
-<p class="card-text"><b>Message</b> : <?php echo $_GET['message']; ?> </p>
-</div>
-</div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Rappel de vos informations</h5>
+                <p class="card-text"><b>Email</b> : <?php echo $_GET['email']; ?> </p>
+                <p class="card-text"><b>Message</b> : <?php echo $_GET['message']; ?> </p>
+            </div>
+        </div>
     </div>
 
     <!-- inclusion du bas de page du site -->
     <?php include_once('footer.php'); ?>
-
 </body>
 </html>
